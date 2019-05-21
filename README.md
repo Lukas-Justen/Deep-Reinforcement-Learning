@@ -1,0 +1,2 @@
+# Deep-Reinforcement_Learning
+This repository contains the source code and documentation for the course project of the Deep Reinforcement Learning class at Northwestern University. The goal of the project was setting up an Open AI Gym and train different Deep Reinforcement Learning algorithms on the same environment to find out strengths and weaknesses for each algorithm. This will help us to get a better understanding of these algorithms and when it makes sense to use a particular algorithm or  modification.

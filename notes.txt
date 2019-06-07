@@ -1,0 +1,101 @@
+- Big batch size 256 or 512 forces deep q learning algorithms to actually learn the policy much better (Run basic deep q with a bigger batch size again to bolster that claim)
+- It is hard to say when the best time is to update the target network for the double deep q implementation. Especially, for the dueling deep q network it is important that the double dqn works fine. Otherwise your network might be right but the update mechanism prevents the network from learning anything
+- The exploration/exploitation tradeoff decides how fast the lunar lander learns and when it starts to leverage that knowledge. However, if the network learned to fly and the epsilon is too high it might see some new states with low reward which causes the network to forget how to fly	
+
+BASIC
+1 Small network, High learning rate, little exploration time, steps, small batch size 200
+2 Bigger network, low learning rate, more exploration time, big batch size, steps 200
+3 Bigger network, low learning rate, bigger memory 4x, big batch size, steps 300
+Maybe provide that as evidence https://arxiv.org/pdf/1803.07482.pdf
+
+DOUBLE
+1 Same network, low learning rate, memory size = 10000, steps 300 => Stagnates around 30 reward points
+2 Same network, low learning rate, memory size = 10000, steps 500 => Stagnates earlier around 10 points
+3 different optimizer (Ada), memory = 2000, steps = 1000 =>  
+
+CONCLUSION
+There are a lot of hyper parameters you need to tune. Especially if you use more and more advanced techniques and network architectures.
+In addition, the relationship between some of the hyper parameters is not yet really understood which makes it really hard to tune these 
+models. For example, our basic DQN is able to solve the Cart Pole environment but stagnates for the Lunar Environment
+
+Maybe provide that as evidence for trying different optimizer https://github.com/dennybritz/reinforcement-learning/issues/30
+Double Deep Q
+100 5000 87.79 -174.34597538659634
+200 5000 95.93 -164.2502897678461
+300 5000 102.28 -179.77452391691884
+400 5000 114.97 -169.77588805147997
+500 5000 128.88 -166.60534355711934
+600 5000 130.82 -145.41239973133025
+700 5000 164.7 -152.2269996569921
+800 5000 143.92 -126.18294190355205
+900 5000 175.25 -140.43855809932066
+1000 5000 206.66 -109.59243360725351
+1100 5000 231.9 -112.75844144385675
+1200 5000 338.73 -131.03606908077262
+1300 5000 343.63 -78.06951337443716
+1400 5000 363.25 -93.47774527297763
+1500 5000 592.15 -56.23115867339711
+1600 5000 694.58 -28.49236088386739
+1700 5000 849.08 37.78011878234187
+1800 5000 916.32 56.828917898491646
+1900 5000 905.99 57.71444442653212
+2000 5000 902.67 81.68135126223065
+2100 5000 828.08 117.13395235058323
+2200 5000 813.54 83.08772579105351
+2300 5000 814.24 51.675439441616476
+2400 5000 872.3 25.84791315346589
+2500 5000 907.58 -4.840947895069248
+
+Dueling Deep Q
+100 5000 92.68 -171.65952676150076
+200 5000 96.6 -167.57680104767067
+300 5000 103.73 -146.6053071642275
+400 5000 109.11 -155.77275008440657
+500 5000 115.88 -139.0579769069435
+600 5000 145.88 -139.81258302504185
+700 5000 138.23 -134.6788075784886
+800 5000 154.81 -122.33914866085425
+900 5000 188.76 -119.95851165921508
+1000 5000 190.42 -101.134989400538
+1100 5000 261.75 -74.89199397863726
+1200 5000 271.13 -83.86764090777532
+1300 5000 338.72 -50.95908675910251
+1400 5000 391.19 -39.24349710161866
+1500 5000 529.1 -12.441906708833551
+1600 5000 651.29 11.897859916771175
+1700 5000 666.14 3.859161495166421
+1800 5000 901.65 23.089651484607263
+1900 5000 936.39 32.19963943296145
+2000 5000 908.8 27.783669838491583
+2100 5000 829.51 21.287827524355894
+2200 5000 835.23 -15.054536926069225
+2300 5000 920.46 -6.727226444167624
+2400 5000 883.41 -26.745149479483096
+
+Basic Deep Q
+100 5000 97.51 -194.08093022199176
+200 5000 116.64 -152.80246586471844
+300 5000 114.46 -117.51321239631295
+400 5000 122.83 -103.16080852302906
+500 5000 108.63 -87.77001446092125
+600 5000 140.65 -75.21702737872151
+700 5000 140.09 -62.70662475569466
+800 5000 182.28 -71.77626272235513
+900 5000 206.47 -33.937850733692535
+1000 5000 331.63 -20.66108628409575
+1100 5000 526.22 5.346702120352476
+1200 5000 597.0 5.8478928714122675
+1300 5000 720.2 28.605417355041464
+1400 5000 832.84 30.074723643759945
+1500 5000 909.91 54.46364152107962
+1600 5000 939.48 47.77474422696361
+1700 5000 958.13 25.842665792493577
+1800 5000 983.12 16.103157874392128
+1900 5000 939.67 4.890893251781966
+2000 5000 963.92 55.50224032477447
+2100 5000 969.52 21.19538712462887
+2200 5000 984.16 -15.665994542594138
+
+TODO
+- Put LunarEnvironment class is separate python file
+- Add markdown text with most important conclusion to the notebook

@@ -312,7 +312,11 @@ class DuelingDeepQLearning(DoubleDeepQLearning):
 
 ## 4. Policy Gradient Learning
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Policy Gradient applies a different mindset when deciding what actions to take. Rather than learning (regressing) the optimal Q-values associated with a next best action (like in the other DQN algorithms), Policy Gradient attempts to directly generate the next action as a classifiction task following the Markov property, using a softmax operation in the last layer of the network. For this case, to encorporate the reward structure, each step of the optimizer is weighted by the cumulative reward of the future actions in the episode. 
+
+This was much harder to implement with the Keras API, as it involved changing the fundamental loss function supplied to the model compilation of Keras. Instead, we opted to use a Tensorflow implementation, that very easily configures the loss function based on how you wish to supply the weighting.
+
+Judging from the plots, it appears that Policy Gradient in this context is very erratic in its training. It is able to achieve extremely high average rewards compared to the other Deep Q-learning algorithms, but has no stability to its training curve. This results in a lower reliability on the reward capability of Policy Gradient. Random dropping of the average reward result value, even after the network appears to be performing optimally, requires the weights to be cherry-picked (we opted not to do so, hence the videos represent sub-optimal models) hinting at the idea that the network may not be easily generalisable to newer situations of similar environments.
 
 #### Implementation
 
